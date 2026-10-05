@@ -1,0 +1,8 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+.env
+workspace/scratch/
+
+node_modules/

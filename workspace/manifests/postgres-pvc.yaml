@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: default
+  labels:
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # storageClassName is deliberately omitted so the cluster's default class
+  # provisions the volume (Docker Desktop: `hostpath`). Setting it to "" would
+  # mean the opposite - no class, no dynamic provisioning, bind only to a
+  # pre-created PV - which is what left the pod Pending before.

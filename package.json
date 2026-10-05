@@ -1,0 +1,8 @@
+{
+  "name": "kubernetes-devops-copilot",
+  "private": true,
+  "description": "Local dependency pin for mcp-server-kubernetes. Launched via `node` rather than npx: on Windows + Node 20+, spawning npx.cmd throws EINVAL and the MCP server silently reports status 'failed'.",
+  "dependencies": {
+    "mcp-server-kubernetes": "^4.1.6"
+  }
+}

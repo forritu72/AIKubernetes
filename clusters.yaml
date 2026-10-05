@@ -1,0 +1,19 @@
+# Cluster profiles. This file is the AWS seam: moving to EKS is
+#   aws eks update-kubeconfig --name prod
+# plus uncommenting a profile below. No code change.
+default: local
+
+profiles:
+  local:
+    label: Docker Desktop (local)
+    context: docker-desktop
+    kubeconfig: ~/.kube/config
+    env: {}
+
+  # eks-prod:
+  #   label: EKS production (us-east-1)
+  #   context: arn:aws:eks:us-east-1:123456789012:cluster/prod
+  #   kubeconfig: ~/.kube/config
+  #   env:
+  #     AWS_PROFILE: prod
+  #     AWS_REGION: us-east-1

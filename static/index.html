@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local DevOps Copilot</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" id="conn-dot"></span>
+      <strong>DevOps Copilot</strong>
+    </div>
+    <div class="topbar-meta">
+      <label class="field">
+        <span>Cluster</span>
+        <select id="cluster-select"></select>
+      </label>
+      <span class="chip" id="context-chip">—</span>
+      <span class="chip" id="github-chip">GitHub: —</span>
+      <span class="chip" id="model-chip">—</span>
+      <button id="reset-btn" class="ghost" title="Drop conversation context and reconnect">New session</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel cluster-panel">
+      <div class="panel-head">
+        <h2>Cluster</h2>
+        <span class="muted" id="overview-age">—</span>
+      </div>
+
+      <div id="cluster-error" class="banner hidden"></div>
+
+      <section class="panel-section">
+        <h3>Nodes</h3>
+        <div id="nodes"></div>
+      </section>
+
+      <section class="panel-section">
+        <h3>Pods <span class="badge" id="pod-count"></span></h3>
+        <div id="pods" class="scroll"></div>
+      </section>
+
+      <section class="panel-section">
+        <h3>Warning events</h3>
+        <div id="events" class="scroll"></div>
+      </section>
+    </aside>
+
+    <section class="chat">
+      <div id="transcript" class="transcript">
+        <div class="welcome">
+          <h1>Local DevOps Copilot</h1>
+          <p>Reads run automatically. Every write pauses for your approval.</p>
+          <ul class="examples">
+            <li data-example="What's wrong in the demo namespace?">What's wrong in the demo namespace?</li>
+            <li data-example="Write a Deployment, Service and ConfigMap for an nginx app with 2 replicas, resource limits and a readiness probe.">Write manifests for an nginx app</li>
+            <li data-example="Why did the last GitHub Actions run fail?">Why did the last Actions run fail?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="composer">
+        <textarea id="input" rows="2" placeholder="Ask the copilot…  (Enter to send, Shift+Enter for a newline)"></textarea>
+        <div class="composer-actions">
+          <button id="stop-btn" class="danger hidden">Stop</button>
+          <button id="send-btn" class="primary">Send</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

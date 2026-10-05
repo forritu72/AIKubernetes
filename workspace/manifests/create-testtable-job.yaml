@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-testtable
+spec:
+  template:
+    spec:
+      containers:
+      - name: create-table
+        image: postgres:15
+        env:
+        - name: PGPASSWORD
+          value: testpassword
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            until pg_isready -h test-database -p 5432; do
+              echo "Waiting for postgres..."
+              sleep 2
+            done
+            psql -h test-database -U testuser -d TestDB -c "CREATE TABLE IF NOT EXISTS testTable (id SERIAL PRIMARY KEY, name VARCHAR(50));"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+      securityContext:
+        fsGroup: 999
+      restartPolicy: OnFailure
